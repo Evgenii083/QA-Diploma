@@ -20,10 +20,10 @@ public class DbUtils {
     public static Connection getConnection() {
         Connection connection = null;
         try {
-            connection = DriverManager
-                    .getConnection("jdbc:postgresql://localhost:5431/app", "app", "pass");
 //            connection = DriverManager
-//                        .getConnection("jdbc:mysql://localhost:3306/app", "app", "pass");
+//                    .getConnection("jdbc:postgresql://localhost:5431/app", "app", "pass");
+            connection = DriverManager
+                        .getConnection("jdbc:mysql://localhost:3306/app", "app", "pass");
 
         } catch (SQLException exception) {
             exception.printStackTrace();

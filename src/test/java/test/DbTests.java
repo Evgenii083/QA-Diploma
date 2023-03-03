@@ -1,7 +1,9 @@
 package test;
 
+import com.codeborne.selenide.logevents.SelenideLogger;
 import data.DataHelper;
 import data.DbUtils;
+import io.qameta.allure.selenide.AllureSelenide;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.*;
 import page.MainPage;
@@ -11,13 +13,24 @@ import page.PaymentDebitPage;
 import static com.codeborne.selenide.Selenide.open;
 
 public class DbTests {
+
+    @BeforeAll
+    static void allureSetUp() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
+    }
+
     @BeforeEach
     public void setUp() {
         open("http://localhost:8080/");
     }
 
+    @AfterAll
+    static void tearDownAll() {
+        SelenideLogger.removeListener("allure");
+    }
+
     @AfterEach
-    public void cleanDb(){
+    public void cleanDb() {
         var settings = new DbUtils();
         settings.cleanDb();
     }
@@ -90,11 +103,11 @@ public class DbTests {
         var year = DataHelper.validYearForCard();
         var owner = DataHelper.cardOwner("Oleg Tinkoff");
         var cvv = DataHelper.validCvvCode();
-        page.fillCreditForm(1, month, year, owner, cvv);
+        page.fillCreditForm(2, month, year, owner, cvv);
         DbUtils sql = new DbUtils();
         sql.waitNotificationForDb();
         var actual = sql.getCreditStatus();
-        var expected = "APPROVED";
+        var expected = "DECLINED";
         Assertions.assertEquals(expected, actual);
     }
 

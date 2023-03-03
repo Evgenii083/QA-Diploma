@@ -1,9 +1,18 @@
 plugins {
     id 'java'
+    id 'io.freefair.lombok' version '5.3.0'
+    id 'io.qameta.allure' version '2.9.6'
 }
 
 group 'org.example'
 version '1.0-SNAPSHOT'
+
+allure {
+    version = '2.16.1'
+    useJUnit5 {
+        version = '2.16.1'
+    }
+}
 
 repositories {
     mavenCentral()
@@ -32,8 +41,11 @@ dependencies {
     testImplementation 'io.rest-assured:rest-assured:4.5.1'
     implementation 'net.andreinc:mockneat:0.4.8'
     testImplementation 'com.google.code.gson:gson:2.9.0'
+
+    testImplementation 'io.qameta.allure:allure-selenide:2.19.0'
 }
 
 test {
     useJUnitPlatform()
+    systemProperty 'selenide.headless', System.getProperty('selenide.headless')
 }

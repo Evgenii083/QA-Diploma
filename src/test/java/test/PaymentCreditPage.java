@@ -1,14 +1,23 @@
 package test;
 
+import com.codeborne.selenide.logevents.SelenideLogger;
 import data.DataHelper;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.*;
 import page.MainPage;
 
 import static com.codeborne.selenide.Selenide.open;
 
 public class PaymentCreditPage {
+    @AfterAll
+    static void tearDownAll() {
+        SelenideLogger.removeListener("allure");
+    }
+    @BeforeAll
+    static void allureSetUp() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
+    }
+
     @BeforeEach
     public void setUp() {
         open("http://localhost:8080/");
