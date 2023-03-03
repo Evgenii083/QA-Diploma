@@ -1,10 +1,19 @@
 version: '3.7'
 services:
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: app
+    ports:
+      - '5431:5432'
   mysql:
     image: mysql:latest
+    restart: always
     ports:
       - '3306:3306'
-
     environment:
       - MYSQL_RANDOM_ROOT_PASSWORD=yes
       - MYSQL_DATABASE=app
