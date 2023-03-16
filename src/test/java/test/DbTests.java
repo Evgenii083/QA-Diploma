@@ -4,7 +4,6 @@ import com.codeborne.selenide.logevents.SelenideLogger;
 import data.DataHelper;
 import data.DbUtils;
 import io.qameta.allure.selenide.AllureSelenide;
-import lombok.SneakyThrows;
 import org.junit.jupiter.api.*;
 import page.MainPage;
 import page.PaymentCreditPage;
@@ -31,11 +30,9 @@ public class DbTests {
 
     @AfterEach
     public void cleanDb() {
-        var settings = new DbUtils();
-        settings.cleanDb();
+        DbUtils.cleanDb();
     }
 
-    @SneakyThrows
     @Test
     @DisplayName("27. Отправка запроса в СУБД при покупке тура по карте со статусом 'APPROVED'")
     public void checkApprovedStatusInDb() {
@@ -44,17 +41,16 @@ public class DbTests {
         page.PaymentDebitPage page = new PaymentDebitPage();
         var month = DataHelper.validMonthForCard();
         var year = DataHelper.validYearForCard();
-        var owner = DataHelper.cardOwner("Daria Nikova");
+        var owner = "Daria Nikova";
         var cvv = DataHelper.validCvvCode();
         page.fillForm(1, month, year, owner, cvv);
         DbUtils sql = new DbUtils();
-        sql.waitNotificationForDb();
+        mainPage.waitNotificationForDb();
         var actual = sql.getDebitStatus();
         var expected = "APPROVED";
         Assertions.assertEquals(expected, actual);
     }
 
-    @SneakyThrows
     @Test
     @DisplayName("28. Отправка запроса в СУБД при покупке тура по карте со статусом 'APPROVED' в кредит ")
     public void checkApprovedStatusInDbInCaseCreditPayment() {
@@ -63,17 +59,16 @@ public class DbTests {
         page.PaymentCreditPage page = new PaymentCreditPage();
         var month = DataHelper.validMonthForCard();
         var year = DataHelper.validYearForCard();
-        var owner = DataHelper.cardOwner("Daria Nikulina");
+        var owner = "Daria Nikulina";
         var cvv = DataHelper.validCvvCode();
         page.fillCreditForm(1, month, year, owner, cvv);
         DbUtils sql = new DbUtils();
-        sql.waitNotificationForDb();
+        mainPage.waitNotificationForDb();
         var actual = sql.getCreditStatus();
         var expected = "APPROVED";
         Assertions.assertEquals(expected, actual);
     }
 
-    @SneakyThrows
     @Test
     @DisplayName("29. Отправка запроса в СУБД при покупке тура по карте со статусом 'DECLINED'")
     public void checkDeclinedStatusInDb() {
@@ -82,17 +77,16 @@ public class DbTests {
         page.PaymentDebitPage page = new PaymentDebitPage();
         var month = DataHelper.validMonthForCard();
         var year = DataHelper.validYearForCard();
-        var owner = DataHelper.cardOwner("Oleg Tinkoff");
+        var owner = "Oleg Tinkoff";
         var cvv = DataHelper.validCvvCode();
         page.fillForm(2, month, year, owner, cvv);
         DbUtils sql = new DbUtils();
-        sql.waitNotificationForDb();
+        mainPage.waitNotificationForDb();
         var actual = sql.getDebitStatus();
         var expected = "DECLINED";
         Assertions.assertEquals(expected, actual);
     }
 
-    @SneakyThrows
     @Test
     @DisplayName("30. Отправка запроса в СУБД при покупке тура по карте со статусом 'DECLINED' в кредит ")
     public void checkDeclinedStatusInDbInCaseCreditPayment() {
@@ -101,11 +95,11 @@ public class DbTests {
         page.PaymentCreditPage page = new PaymentCreditPage();
         var month = DataHelper.validMonthForCard();
         var year = DataHelper.validYearForCard();
-        var owner = DataHelper.cardOwner("Oleg Tinkoff");
+        var owner = "Oleg Tinkoff";
         var cvv = DataHelper.validCvvCode();
         page.fillCreditForm(2, month, year, owner, cvv);
         DbUtils sql = new DbUtils();
-        sql.waitNotificationForDb();
+        mainPage.waitNotificationForDb();
         var actual = sql.getCreditStatus();
         var expected = "DECLINED";
         Assertions.assertEquals(expected, actual);

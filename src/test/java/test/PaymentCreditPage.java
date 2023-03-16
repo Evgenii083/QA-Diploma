@@ -31,7 +31,7 @@ public class PaymentCreditPage {
         page.PaymentCreditPage creditForm = new page.PaymentCreditPage();
         var month = DataHelper.validMonthForCard();
         var year = DataHelper.validYearForCard();
-        var owner = DataHelper.cardOwner("Elena Ivanova");
+        var owner = "Elena Ivanova";
         var cvv = DataHelper.validCvvCode();
         creditForm.fillCreditForm(1, month, year, owner, cvv);
         creditForm.waitSuccessNotification();
@@ -45,7 +45,7 @@ public class PaymentCreditPage {
         page.PaymentCreditPage creditForm = new page.PaymentCreditPage();
         var month = DataHelper.validMonthForCard();
         var year = DataHelper.validYearForCard();
-        var owner = DataHelper.cardOwner("Elena Ivanova");
+        var owner = "Elena Ivanova";
         var cvv = DataHelper.validCvvCode();
         creditForm.fillCreditForm(2, month, year, owner, cvv);
         creditForm.waitFailedNotification();
@@ -59,7 +59,7 @@ public class PaymentCreditPage {
         page.PaymentCreditPage creditForm = new page.PaymentCreditPage();
         var month = DataHelper.validMonthForCard();
         var year = DataHelper.validYearForCard();
-        var owner = DataHelper.cardOwner("Elena Ivanova");
+        var owner = "Elena Ivanova";
         var cvv = DataHelper.validCvvCode();
         creditForm.fillCreditForm(3, month, year, owner, cvv);
         creditForm.waitWrongFormatMessage();
@@ -71,9 +71,9 @@ public class PaymentCreditPage {
         MainPage main = new MainPage();
         main.payWithCredit();
         page.PaymentCreditPage creditForm = new page.PaymentCreditPage();
-        var month = DataHelper.monthForCard("00");
+        var month = "00";
         var year = DataHelper.validYearForCard();
-        var owner = DataHelper.cardOwner("Elena Ivanova");
+        var owner = "Elena Ivanova";
         var cvv = DataHelper.validCvvCode();
         creditForm.fillCreditForm(2, month, year, owner, cvv);
         creditForm.waitWrongCardExpirationMessage();
@@ -85,9 +85,9 @@ public class PaymentCreditPage {
         MainPage main = new MainPage();
         main.payWithCredit();
         page.PaymentCreditPage creditForm = new page.PaymentCreditPage();
-        var month = DataHelper.monthForCard("13");
+        var month = "13";
         var year = DataHelper.validYearForCard();
-        var owner = DataHelper.cardOwner("Elena Ivanova");
+        var owner = "Elena Ivanova";
         var cvv = DataHelper.validCvvCode();
         creditForm.fillCreditForm(1, month, year, owner, cvv);
         creditForm.waitWrongCardExpirationMessage();
@@ -100,8 +100,8 @@ public class PaymentCreditPage {
         main.payWithCredit();
         page.PaymentCreditPage creditForm = new page.PaymentCreditPage();
         var month = DataHelper.validMonthForCard();
-        var year = DataHelper.yearForCard("22");
-        var owner = DataHelper.cardOwner("Elena Ivanova");
+        var year = "22";
+        var owner = "Elena Ivanova";
         var cvv = DataHelper.validCvvCode();
         creditForm.fillCreditForm(1, month, year, owner, cvv);
         creditForm.waitCardExpiredMessage();
@@ -114,8 +114,8 @@ public class PaymentCreditPage {
         main.payWithCredit();
         page.PaymentCreditPage creditForm = new page.PaymentCreditPage();
         var month = DataHelper.validMonthForCard();
-        var year = DataHelper.yearForCard("99");
-        var owner = DataHelper.cardOwner("Elena Ivanova");
+        var year = "99";
+        var owner = "Elena Ivanova";
         var cvv = DataHelper.validCvvCode();
         creditForm.fillCreditForm(1, month, year, owner, cvv);
         creditForm.waitWrongCardExpirationMessage();
@@ -129,7 +129,7 @@ public class PaymentCreditPage {
         page.PaymentCreditPage creditForm = new page.PaymentCreditPage();
         var month = DataHelper.validMonthForCard();
         var year = DataHelper.validYearForCard();
-        var owner = DataHelper.cardOwner("9936544");
+        var owner = "9936544";
         var cvv = DataHelper.validCvvCode();
         creditForm.fillCreditForm(1, month, year, owner, cvv);
         creditForm.waitInvalidCharactersMessage();
@@ -143,7 +143,7 @@ public class PaymentCreditPage {
         page.PaymentCreditPage creditForm = new page.PaymentCreditPage();
         var month = DataHelper.validMonthForCard();
         var year = DataHelper.validYearForCard();
-        var owner = DataHelper.cardOwner("&$#@@!@");
+        var owner = "&$#@@!@";
         var cvv = DataHelper.validCvvCode();
         creditForm.fillCreditForm(1, month, year, owner, cvv);
         creditForm.waitInvalidCharactersMessage();
@@ -157,7 +157,7 @@ public class PaymentCreditPage {
         page.PaymentCreditPage creditForm = new page.PaymentCreditPage();
         var month = DataHelper.validMonthForCard();
         var year = DataHelper.validYearForCard();
-        var owner = DataHelper.cardOwner("  Elena Ivanova");
+        var owner = "  Elena Ivanova";
         var cvv = DataHelper.validCvvCode();
         creditForm.fillCreditForm(1, month, year, owner, cvv);
         creditForm.waitInvalidCharactersMessage();
@@ -171,8 +171,8 @@ public class PaymentCreditPage {
         page.PaymentCreditPage creditForm = new page.PaymentCreditPage();
         var month = DataHelper.validMonthForCard();
         var year = DataHelper.validYearForCard();
-        var owner = DataHelper.cardOwner("Evgenii Shipov");
-        var cvv = DataHelper.cvvCode("52");
+        var owner = "Evgenii Shipov";
+        var cvv = "52";
         creditForm.fillCreditForm(1, month, year, owner, cvv);
         creditForm.waitWrongFormatMessage();
     }
@@ -185,11 +185,12 @@ public class PaymentCreditPage {
         page.PaymentCreditPage creditForm = new page.PaymentCreditPage();
         var month = DataHelper.validMonthForCard();
         var year = DataHelper.validYearForCard();
-        var owner = DataHelper.cardOwner("Evgenii Shipov");
-        var cvv = DataHelper.cvvCode("2");
+        var owner = "Evgenii Shipov";
+        var cvv = "2";
         creditForm.fillCreditForm(1, month, year, owner, cvv);
         creditForm.waitWrongFormatMessage();
     }
+
     @Test
     @DisplayName("№15 Отправка пустой формы")
     public void emptyForm() {
@@ -199,5 +200,20 @@ public class PaymentCreditPage {
         creditForm.cleanForm();
         creditForm.clickSubmitButton();
         creditForm.waitMandatoryFieldMessage();
+
+    }
+
+    @Test
+    public void test() {
+        System.out.println(DataHelper.validYearForCard());
+        System.out.println(DataHelper.validYearForCard());
+        System.out.println(DataHelper.validYearForCard());
+        System.out.println(DataHelper.validYearForCard());
+        System.out.println(DataHelper.validYearForCard());
+        System.out.println(DataHelper.validYearForCard());
+        System.out.println(DataHelper.validYearForCard());
+
+        System.out.println(DataHelper.validYearForCard());
+
     }
 }

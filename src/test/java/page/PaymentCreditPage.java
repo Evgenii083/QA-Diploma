@@ -30,10 +30,10 @@ public class PaymentCreditPage {
 
     public void fillCreditForm(int card, String monthNumber, String yearNumber, String owner, String cvvCode) {
         cardNumber.setValue(DataHelper.getCard(card));
-        month.setValue(DataHelper.monthForCard(monthNumber));
-        year.setValue(DataHelper.yearForCard(yearNumber));
-        cardOwner.setValue(DataHelper.cardOwner(owner));
-        cvv.setValue(DataHelper.cvvCode(cvvCode));
+        month.setValue(monthNumber);
+        year.setValue(yearNumber);
+        cardOwner.setValue(owner);
+        cvv.setValue(cvvCode);
         submitButton.click();
     }
 

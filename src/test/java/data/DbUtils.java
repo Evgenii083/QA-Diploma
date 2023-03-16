@@ -1,90 +1,67 @@
 package data;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.SelenideElement;
+import lombok.SneakyThrows;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.time.Duration;
-
-import static com.codeborne.selenide.Selenide.$x;
 
 public class DbUtils {
 
-    private SelenideElement notification
-            = $x("//*[@class = 'notification notification_visible notification_status_ok notification_has-closer notification_stick-to_right notification_theme_alfa-on-white']");
+    private static String url = System.getProperty("db.url");
+    private static String appURL = System.getProperty("app.url");
+    private static String appPORT = System.getProperty("app.port");
+    private static String userDB = System.getProperty("app.userDB");
+    private static String password = System.getProperty("app.password");
 
+    @SneakyThrows
     public static Connection getConnection() {
         Connection connection = null;
-        try {
-//            connection = DriverManager
-//                    .getConnection("jdbc:postgresql://localhost:5431/app", "app", "pass");
-            connection = DriverManager
-                        .getConnection("jdbc:mysql://localhost:3306/app", "app", "pass");
 
-        } catch (SQLException exception) {
-            exception.printStackTrace();
-        }
+        connection = DriverManager.getConnection(url, userDB, password);
+
         return connection;
     }
 
-
-    public void cleanDb() {
+    @SneakyThrows
+    public static void cleanDb() {
         var runner = new QueryRunner();
         var cleanCredit = "DELETE FROM credit_request_entity";
         var cleanDebit = "DELETE FROM payment_entity";
         var cleanOrder = "DELETE FROM order_entity";
 
-        try (
-                var connection = getConnection();
-        ) {
-            runner.update(connection, cleanCredit);
-            runner.update(connection, cleanDebit);
-            runner.update(connection, cleanOrder);
-        } catch (SQLException exception) {
-            exception.printStackTrace();
-        }
+        var connection = getConnection();
+        runner.update(connection, cleanCredit);
+        runner.update(connection, cleanDebit);
+        runner.update(connection, cleanOrder);
     }
 
-    public String getCreditStatus() {
+    @SneakyThrows
+    public static String getCreditStatus() {
         var runner = new QueryRunner();
         var request
                 = "select status from credit_request_entity where created = (select max(created)from credit_request_entity)";
         var result = "";
-        try (
-                var connection = getConnection();
-        ) {
-            var status = runner.query(connection, request, new ScalarHandler<>());
-            System.out.println(status);
-            result = (String) status;
-        } catch (SQLException exception) {
-            exception.printStackTrace();
-        }
+        var connection = getConnection();
+        var status = runner.query(connection, request, new ScalarHandler<>());
+        System.out.println(status);
+        result = (String) status;
         return result;
     }
 
-    public String getDebitStatus() {
+    @SneakyThrows
+    public static String getDebitStatus() {
         var runner = new QueryRunner();
         var request = "select status from payment_entity where created = (select max(created)from payment_entity)";
         var result = "";
 
-        try (
-                var connection = getConnection();
-        ) {
-            var status = runner.query(connection, request, new ScalarHandler<>());
-            System.out.println(status);
-            result = (String) status;
-        } catch (SQLException exception) {
-            exception.printStackTrace();
-        }
+        var connection = getConnection();
+        var status = runner.query(connection, request, new ScalarHandler<>());
+        System.out.println(status);
+        result = (String) status;
         return result;
     }
 
-    public void waitNotificationForDb() {
-        notification.shouldBe(Condition.visible, Duration.ofSeconds(12));
-    }
 }
 
