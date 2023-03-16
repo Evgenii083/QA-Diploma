@@ -25,7 +25,7 @@ public class DataHelper {
 
     public static String validYearForCard() {
         Faker faker = new Faker();
-        int randomInteger = faker.random().nextInt(0, 4);
+        int randomInteger = faker.random().nextInt(1, 4);
         int year = Year.now().getValue() % 100 + randomInteger;
         return String.valueOf(year);
     }
