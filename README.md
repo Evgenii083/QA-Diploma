@@ -1,3 +1,13 @@
+# Дипломный проект профессии «Тестировщик»
+[Описание задания](https://github.com/netology-code/qa-diploma)
+
+[План автоматизации](https://github.com/Evgenii083/QA-Diploma/blob/main/Test-plan.md)
+
+[Отчет по итогам тестирования](https://github.com/Evgenii083/QA-Diploma/blob/main/Report.md)
+
+[Отчет по итогам автоматизации](https://github.com/Evgenii083/QA-Diploma/blob/main/Automation%20report.md)
+
+
 # Инструкция по запуску
 
 1) Склонировать репозиторий
