@@ -44,9 +44,8 @@ public class DbTests {
         var owner = "Daria Nikova";
         var cvv = DataHelper.validCvvCode();
         page.fillForm(1, month, year, owner, cvv);
-        DbUtils sql = new DbUtils();
         mainPage.waitNotificationForDb();
-        var actual = sql.getDebitStatus();
+        var actual = DbUtils.getDebitStatus();
         var expected = "APPROVED";
         Assertions.assertEquals(expected, actual);
     }
@@ -62,9 +61,8 @@ public class DbTests {
         var owner = "Daria Nikulina";
         var cvv = DataHelper.validCvvCode();
         page.fillCreditForm(1, month, year, owner, cvv);
-        DbUtils sql = new DbUtils();
         mainPage.waitNotificationForDb();
-        var actual = sql.getCreditStatus();
+        var actual = DbUtils.getCreditStatus();
         var expected = "APPROVED";
         Assertions.assertEquals(expected, actual);
     }
@@ -80,9 +78,8 @@ public class DbTests {
         var owner = "Oleg Tinkoff";
         var cvv = DataHelper.validCvvCode();
         page.fillForm(2, month, year, owner, cvv);
-        DbUtils sql = new DbUtils();
         mainPage.waitNotificationForDb();
-        var actual = sql.getDebitStatus();
+        var actual = DbUtils.getDebitStatus();
         var expected = "DECLINED";
         Assertions.assertEquals(expected, actual);
     }
@@ -98,9 +95,8 @@ public class DbTests {
         var owner = "Oleg Tinkoff";
         var cvv = DataHelper.validCvvCode();
         page.fillCreditForm(2, month, year, owner, cvv);
-        DbUtils sql = new DbUtils();
         mainPage.waitNotificationForDb();
-        var actual = sql.getCreditStatus();
+        var actual = DbUtils.getCreditStatus();
         var expected = "DECLINED";
         Assertions.assertEquals(expected, actual);
     }

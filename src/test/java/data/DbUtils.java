@@ -40,12 +40,10 @@ public class DbUtils {
         var runner = new QueryRunner();
         var request
                 = "select status from credit_request_entity where created = (select max(created)from credit_request_entity)";
-        var result = "";
         var connection = getConnection();
         var status = runner.query(connection, request, new ScalarHandler<>());
         System.out.println(status);
-        result = (String) status;
-        return result;
+        return (String) status;
     }
 
     @SneakyThrows

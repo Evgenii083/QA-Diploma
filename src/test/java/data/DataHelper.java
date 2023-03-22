@@ -2,6 +2,8 @@ package data;
 
 import com.github.javafaker.Faker;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.Year;
 import java.util.*;
 
@@ -17,9 +19,11 @@ public class DataHelper {
 
 
     public static String validMonthForCard() {
-        String[] month = new String[]{"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
-        int m = (int) Math.floor(Math.random() * month.length);
-        return month[m];
+        Faker faker = new Faker();
+        LocalDate date = LocalDate.now();
+        int randomMonth = faker.random().nextInt(1,3);
+        String month = date.plusMonths(randomMonth).format(DateTimeFormatter.ofPattern("MM"));
+        return month;
     }
 
 

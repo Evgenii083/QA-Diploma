@@ -203,17 +203,4 @@ public class PaymentCreditPage {
 
     }
 
-    @Test
-    public void test() {
-        System.out.println(DataHelper.validYearForCard());
-        System.out.println(DataHelper.validYearForCard());
-        System.out.println(DataHelper.validYearForCard());
-        System.out.println(DataHelper.validYearForCard());
-        System.out.println(DataHelper.validYearForCard());
-        System.out.println(DataHelper.validYearForCard());
-        System.out.println(DataHelper.validYearForCard());
-
-        System.out.println(DataHelper.validYearForCard());
-
-    }
 }
